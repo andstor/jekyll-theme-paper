@@ -1,0 +1,19 @@
+paper:
+  name: Paper
+  repo_name: jekyll-theme-paper
+  type:
+    - wiki
+    - theme
+  owner: andstor
+  url: https://github.com/andstor/jekyll-theme-paper
+  wiki_url: https://github.com/andstor/jekyll-theme-paper/wiki
+  icon: /assets/images/paper-boat.svg
+
+minima:
+  name: Minima
+  repo_name: minima
+  type:
+    - theme
+  owner: jekyll
+  url: https://github.com/jekyll/minima
+  wiki_url: https://github.com/jekyll/minima/wiki

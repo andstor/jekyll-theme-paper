@@ -1,0 +1,88 @@
+---
+layout: default
+---
+<div class="full-width light-gray">
+  <div class="wrapper flex-container">
+    <div class="section">
+      {%- if page.title -%}
+      <h1 class="page-heading">{{ page.title }}</h1>
+      {%- endif -%}
+
+      <div class="profile-content">
+        <img alt="" class="profile-pic" height="200" src="{{ site.author_img}}" width="200">
+        <h1 class="profile-title">{{ site.author }}</h1>
+        <h3 class="profile-title">{{ site.about_author }}</h3>
+
+        <a href="{{ 'about'  | relative_url }}">
+          <div class="button button-solid">About us</div>
+        </a>
+      </div>
+
+    </div>
+    <div class="section">
+      <img alt="paper plane" class="text-center" src="/assets/images/paper-plane.svg" width="400px">
+    </div>
+  </div>
+</div>
+
+
+<div class="section flex-container">
+  {% for repo in site.data.projects %}
+  {% if repo[1].type contains "wiki" %}
+  <div class="card-wiki">
+    <h2>Wiki</h2>
+    <p class="card-description">Check out the wiki!</p>
+    <img alt="Paper and pencil" src="/assets/images/books-circle.svg" width="250px">
+
+    <a href="docs/{{ repo[0] }}">
+      <div class="card-button button button-outline">See wiki</div>
+    </a>
+  </div>
+  {% endif %}
+  {% endfor %}
+
+  <div class="card-docs">
+    <h2>Documentation</h2>
+    <p class="card-description">Find all the documentation in ONE place.</p>
+    <img alt="Paper and pencil" src="/assets/images/paper-document.svg" width="200px">
+    <a href="docs">
+      <div class="card-button button button-outline">Go to docs</div>
+    </a>
+  </div>
+</div>
+<div class="full-width section divider-container">
+  <div class="divider purple"></div>
+  <div class="sub-divider light-purple"></div>
+</div>
+
+{{ content }}
+
+{%- if site.posts.size > 0 -%}
+
+<div class="section">
+  <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
+  <ul class="post-list">
+    {%- for post in site.posts -%}
+    <li>
+      {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+      <span class="post-meta">{{ post.date | date: date_format }}</span>
+      <h3>
+        <a class="post-link" href="{{ post.url | relative_url }}">
+          {{ post.title | escape }}
+        </a>
+      </h3>
+      {%- if site.show_excerpts -%}
+      {{ post.excerpt }}
+      {%- endif -%}
+    </li>
+    {%- endfor -%}
+  </ul>
+
+  <p class="feed-subscribe">
+    <svg class="svg-icon orange">
+      <use xlink:href="{{ '/assets/minima-social-icons.svg#rss' | relative_url }}"></use>
+    </svg>
+    <a href="{{ "/feed.xml" | relative_url }}">Subscribe</a></p>
+</div>
+{%- endif -%}
+

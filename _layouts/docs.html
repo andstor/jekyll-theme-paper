@@ -1,0 +1,80 @@
+---
+layout: default
+---
+<article>
+  <div class="full-width pink text-white">
+    <div class="section wrapper">
+      <header>
+        <h1 class="title">Documentation</h1>
+      </header>
+
+      <p class="text-center text-lead">Search or browse in depth documentation :book: on all projects developed by <a
+        href="{{ site.author_link }}">{{ site.author }}</a>. From basic setup, to user guides, customisation and
+        development.
+      </p>
+      <div class=" hero-search">
+
+        <!-- Html Elements for Search -->
+        <form class="search" name="search-hero" onsubmit="return false;">
+            <span class="search-icon search-icon-flip">
+                <svg data-svg="search-icon" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="9" cy="9" fill="none" r="7" stroke="#000" stroke-width="1.1"></circle>
+                    <path d="M14,14 L18,18 L14,14 Z" fill="none" stroke="#000" stroke-width="1.1"></path>
+                </svg>
+            </span>
+          <input autocomplete="off" class="search-input box-shadow" id="search-hero" placeholder="Search for answers"
+                 type="search">
+        </form>
+        <ul class="position-absolute width-1-1 list" id="search-hero-results" style="display: none;"></ul>
+        <script>
+        </script>
+      </div>
+    </div>
+  </div>
+
+  {% for type in site.data.types %}
+  {% unless type[0] == "wiki" %}
+  <section class="section">
+    <h2 class="title text-center">{{ type[1].name }}</h2>
+    <p class="text-center text-lead-light">{{ type[1].description }}</p>
+
+    <div class="cards margin-medium-top">
+      {% for repo in site.data.projects %}
+      {% if repo[1].type contains type[0] %}
+      <div class="card">
+        <a href="{{ repo[0] }}">
+          <span class="release" id="{{ repo[1].name }}-release"></span>
+          <div class="card-body flex-container flex-column">
+            <img alt="" height="74" src="{{ repo[1].icon }}">
+            <div class="card-content">
+              <h2 class="card-title">{{ repo[1].name }}</h2>
+              <p id="{{ repo[1].name }}-description"></p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <script>
+        fetch('https://api.github.com/repos/{{ repo[1].owner }}/{{ repo[1].repo_name }} ').
+          then(response => response.json()).
+          then(data => {
+            document.getElementById('{{ repo[1].name }}-description').innerText = data.description;
+          }).
+          catch(error => console.error(error));
+
+        fetch('https://api.github.com/repos/{{ repo[1].owner }}/{{ repo[1].repo_name }}/releases/latest ').
+          then(response => response.json()).
+          then(data => {
+            document.getElementById('{{ repo[1].name }}-release').innerText = data.name;
+          }).
+          catch(error => console.error(error));
+      </script>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endunless %}
+  {% endfor %}
+
+  {{ content }}
+
+</article>

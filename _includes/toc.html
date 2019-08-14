@@ -1,0 +1,20 @@
+{% assign repodata = site.data.projects[site.repo] %}
+
+<div class="nav-toc">
+  <h4>On this page:</h4>
+  <div class="sticky">
+    <div class="">
+      <div class="toc js-toc"></div>
+      <script>
+        tocbot.init({
+          tocSelector: '.js-toc',
+          headingsOffset: 10,
+          collapseDepth: 6,
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.js-toc-content',
+          // Which headings to grab inside of the contentSelector element.
+          headingSelector: 'h1, h2, h3, h4, h5, h6',
+        });</script>
+    </div>
+  </div>
+</div>

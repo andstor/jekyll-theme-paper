@@ -1,0 +1,19 @@
+<div class="breadcrumbs">
+  {% assign breadcrumbs = include.url | remove_first:'/' | split:'/' %}
+
+  {% for breadcrumb in breadcrumbs %}
+  {% assign url = breadcrumbs | slice: 0, forloop.index | join: '/' | prepend: '/'%}
+
+  {% if forloop.first == true %}
+  <div class="breadcrumb-item"><a href="{{ url | relative_url }}">{{ breadcrumb }}</a></div>
+  {% elsif forloop.last == true %}
+  <div class="breadcrumb-item breadcrumb">{{ breadcrumb }}</div>
+
+  {% else %}
+  <div class="breadcrumb-item breadcrumb"><a href="{{ url | relative_url }}">{{ breadcrumb }}</a></div>
+  {%- endif -%}
+  {% endfor %}
+  {%- if include.edit_url -%}
+  <div class="breadcrumb-aside"><a href="{{ include.edit_url | relative_url }}"><i class="far fa-edit"></i> Edit page</a></div>
+  {%- endif -%}
+</div>

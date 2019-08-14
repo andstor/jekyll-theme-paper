@@ -1,0 +1,45 @@
+---
+layout: default-wide
+---
+{% assign repodata = site.data.projects[page.repo] %}
+<div class="flex-container">
+  {% capture files_path %}docs/{{ page.repo }}{% endcapture %}
+  {%- include sidebar.html files_path = files_path active_link = page.start_page -%}
+
+  <div class="main content">
+    <article class="markdown-body">
+
+      {% if page.start_page and page.name == "index.html" %}
+      {% assign name_length = page.start_page | split: "." | size | minus: 1 %}
+      {% capture wiki_url %}{{ repodata.wiki_url }}/{{page.start_page | split: "." | slice: 0, name_length | join: "."}}/_edit{%
+      endcapture %}
+      {% elsif page.name != "index.html" %}
+      {% assign name_length = page.name | split: "." | size | minus: 1 %}
+      {% capture wiki_url %}{{ repodata.wiki_url }}{{page.dir | remove: '/docs/' | remove: page.repo }}{{page.name | split: "." |
+      slice: 0, name_length | join: "."}}/_edit{% endcapture %}
+      {% endif %}
+
+      {%- include breadcrumbs.html url = page.url edit_url = wiki_url -%}
+
+      <div class="js-toc-content">
+        {% if page.start_page and page.name == "index.html" %}
+        {% capture homemd %}docs/{{ page.repo }}/{{page.start_page}}{% endcapture %}
+        {% for file in site.static_files %}
+
+        {% if file.path contains homemd %}
+        {% capture include_page %}{% include_relative {{ file.path | remove: '/docs/' | remove: file.repo | remove: repodata.name }}
+        %}{% endcapture %}
+        {{ include_page | markdownify }}
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+        {{ content }}
+      </div>
+    </article>
+  </div>
+
+  {%- include toc.html content_selector = ".js-toc-content" -%}
+
+</div>
+
