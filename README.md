@@ -1,6 +1,8 @@
 # paper
 Paper is a Jekyll theme for project documentation.
 
+![paper theme preview](screenshot.png)
+
 ## Installation
 
 Add this line to your Jekyll site's Gemfile:
