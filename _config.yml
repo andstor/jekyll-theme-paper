@@ -68,7 +68,7 @@ minima:
 # - about.md
 
 # Build settings
-theme: jekyll-theme-paper
+#theme: jekyll-theme-paper
 
 plugins:
   - jekyll-feed

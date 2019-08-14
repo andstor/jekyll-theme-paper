@@ -9,7 +9,7 @@ layout: default
       {%- endif -%}
 
       <div class="profile-content">
-        <img alt="" class="profile-pic" height="200" src="{{ site.author_img}}" width="200">
+        <img alt="" class="profile-pic" height="200" src="{{ site.author_img | relative_url}}" width="200">
         <h1 class="profile-title">{{ site.author }}</h1>
         <h3 class="profile-title">{{ site.about_author }}</h3>
 
