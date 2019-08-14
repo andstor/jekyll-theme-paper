@@ -45,7 +45,7 @@ layout: default
         <a href="{{ repo[0] }}">
           <span class="release" id="{{ repo[1].name }}-release"></span>
           <div class="card-body flex-container flex-column">
-            <img alt="" height="74" src="{{ repo[1].icon }}">
+            <img alt="" height="74" src="{{ repo[1].icon | relative_url}}">
             <div class="card-content">
               <h2 class="card-title">{{ repo[1].name }}</h2>
               <p id="{{ repo[1].name }}-description"></p>
